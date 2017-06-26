@@ -26,8 +26,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
         //UserDefaults에 저장된 내용을 key를 사용하여 불러옴
-        let decoded = defaults.object(forKey: "items") as! NSData
-        let ItemObject = NSKeyedUnarchiver.unarchiveObject(with: decoded as Data) as! [dataModel]
+        if let decoded = defaults.object(forKey: "items") {
+        let ItemObject = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! [dataModel]
 
         items = ItemObject
         print(items)
@@ -35,7 +35,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UITableViewD
         //Reloads the rows and sections of the table view
         myTableView.reloadData()
         print("after reload items.count = \(items.count)")
-        
+        }
     }
 
 
